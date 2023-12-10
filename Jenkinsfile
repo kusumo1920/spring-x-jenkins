@@ -30,6 +30,11 @@ pipeline {
                 echo './run-smoke-tests'
             }
         }
+        stage('sanity check') {
+            steps {
+                input 'Does the staging environment look ok? If yes, do you wanna proceed to production deployment?'
+            }
+        }
         stage('deploy - production') {
             steps {
                 echo 'Deploying in production environment'
