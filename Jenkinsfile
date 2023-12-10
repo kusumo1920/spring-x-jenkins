@@ -10,12 +10,29 @@ pipeline {
     stages {
         stage('build') {
             steps {
+                echo 'Building'
                 sh 'mvn --version'
                 sh '''
                     echo "Database engine is ${DB_ENGINE}"
                     echo "DISABLE_AUTH is ${DISABLE_AUTH}"
                     printenv
                 '''
+            }
+        }
+        stage('test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+        stage('deploy - staging') {
+            steps {
+                echo 'Deploying in staging environment'
+                echo './run-smoke-tests'
+            }
+        }
+        stage('deploy - production') {
+            steps {
+                echo 'Deploying in production environment'
             }
         }
     }
